@@ -24,26 +24,8 @@ function enqueue_scripts_and_styles()
       get_template_directory_uri() . '/style.css?' . filemtime(get_stylesheet_directory() . '/style.css')
     );
 
-
     // jQueryの読み込み
     wp_enqueue_script('jquery');
-
-
-    wp_enqueue_script(
-      'modulesJs',
-      get_template_directory_uri() . '/assets/js/modules.js',
-      array('jquery'),
-      " ",
-      true
-    );
-
-    wp_enqueue_script(
-      'libJs',
-      get_template_directory_uri() . '/assets/js/lib.js',
-      array('jquery'),
-      " ",
-      true
-    );
 
 
     wp_enqueue_script(
