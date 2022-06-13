@@ -68,6 +68,9 @@ function setup_hello()
 	// js & css ファイル設置
 	add_action('wp_enqueue_scripts', 'enqueue_scripts_and_styles', 999);
 
+	// css フッター設置
+	add_action('get_footer', 'prefix_add_footer_styles');
+
 	// the_excerpt()の末尾に表示する内容を変更
 	// add_filter( 'excerpt_more', 'change_excerpt_more' );
 
