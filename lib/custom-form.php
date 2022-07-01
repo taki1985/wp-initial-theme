@@ -66,23 +66,30 @@ add_action('template_redirect', 'remove_cf7_js_css');
 
 
 //Contact Form 7で作られたフォームのページじゃなければreCAPTCHAを読み込みをキャンセル
-add_action('wp_enqueue_scripts', function () {
-  global $post;
-  $valid_recaptcha = false;
-  $getPost = get_post();
-  if ($getPost) {
-    $content = $getPost->post_content;
+// add_action('wp_enqueue_scripts', function () {
+//   global $post;
+//   $valid_recaptcha = false;
+//   $getPost = get_post();
+//   if ($getPost) {
+//     $content = $getPost->post_content;
 
-    if ($content != null) {
-      //Contact Form 7のショートコードが存在する
-      if (has_shortcode($content, 'contact-form-7')) {
-        $valid_recaptcha = true;
-      }
-    }
+//     if ($content != null) {
+//       //Contact Form 7のショートコードが存在する
+//       if (has_shortcode($content, 'contact-form-7')) {
+//         $valid_recaptcha = true;
+//       }
+//     }
 
-    //ショートコードが存在しなければreCAPTCHAの読み込みをキャンセルする
-    if ($valid_recaptcha == false) {
-      wp_deregister_script('google-recaptcha');
-    }
-  }
-}, 100);
+//     //ショートコードが存在しなければreCAPTCHAの読み込みをキャンセルする
+//     if ($valid_recaptcha == false) {
+//       wp_deregister_script('google-recaptcha');
+//     }
+//   }
+// }, 100);
+
+//Contact Form 7 のreCAPTCHAのしきい値変更
+add_filter('wpcf7_recaptcha_threshold', 'my_wpcf7_recaptcha_threshold');
+function my_wpcf7_recaptcha_threshold($score)
+{
+  return 0.29;
+}
