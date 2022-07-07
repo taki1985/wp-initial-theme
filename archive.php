@@ -72,7 +72,7 @@ get_header();
 							endwhile; ?>
 						</ul>
 					</div>
-					<?php original_page_navi(); ?>
+					<?php my_pagenate(); ?>
 				<?php else : ?>
 					<div class="section-xxl post-content">
 						<p class="txt-center txt-18">

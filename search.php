@@ -33,7 +33,7 @@ get_header();
 				endwhile; ?>
 			</ul>
 
-			<?php original_page_navi(); ?>
+			<?php my_pagenate(); ?>
 		<?php else : ?>
 
 			<section class="section-xl page-content">
