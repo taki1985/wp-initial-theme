@@ -20,12 +20,16 @@ class MY_THEME_FORM
   function __construct()
   {
 
-    // add_filter('wpcf7_ajax_json_echo', array($this,'custom_wpcf7_item_error_position'), 10, 2);
 
     //セレクトボックス空要素のテキスト変更
     add_filter('wpcf7_form_elements', array($this, 'custom_wpcf7_form_elements'));
 
     // add_filter('wpcf7_support_html5_fallback', '__return_true');
+
+    // カスタムバリデーション
+    // add_filter('wpcf7_validate', array($this, 'custom_wpcf7_validate'), 11, 2);
+
+    add_filter('wpcf7_validate_file', array($this,  'custom_wpcf7_file_validate_filter'), 20, 2);
 
     //指定ページでなければCF7とreCAPTCHAのJS,CSSを読み込まない
     add_action('template_redirect', array($this, 'remove_cf7_js_css'));
@@ -36,30 +40,41 @@ class MY_THEME_FORM
     });
   }
 
-
-  /**
-   * Contact Form 7のエラーメッセージの場所を必要な項目のみ変更します。
-   */
-  function custom_wpcf7_item_error_position($items, $result)
+  // カスタムバリデーション
+  function custom_wpcf7_file_validate_filter($result, $tag)
   {
-    // メッセージを表示させたい場所のタグのエラー用のクラス名
-    $class = 'wpcf7-custom-item-error';
-    // メッセージの位置を変更したい項目名
-    $names = array('your_year', 'your_month', 'your_day', 'your_zip');
+    if ('your_file2' == $tag->name) {
+      $your_file2 = isset($_FILES['your_file2']['name']) ? trim($_FILES['your_file2']['name']) : '';
+      $your_category = isset($_POST['your_category']) ? trim($_POST['your_category']) : '';
 
-    // 入力エラーがある場合
-    // 入力エラーがある場合
-    if (isset($items['invalid_fields'])) {
-      foreach ($items['invalid_fields'] as $k => $v) {
-        $orig = $v['into'];
-        $name = substr($orig, strrpos($orig, ".") + 1);
-        // 位置を変更したい項目のみ、エラーを設定するタグのクラス名を差替
-        if (in_array($name, $names)) {
-          $items['invalid_fields'][$k]['into'] = ".{$class}.{$name}";
+      if (strpos($your_category, '新卒') === false && strpos($your_category, 'インターン') === false && $your_file2 == '') {
+        $result->invalidate($tag, '必須項目に入力してください。');
+      }
+    }
+
+    return $result;
+  }
+
+  function __custom_wpcf7_validate($result, $tags)
+  {
+
+    foreach ($tags as $tag) {
+      $name = $tag['name'];
+      if ($name == 'your_category') {
+        $cat = $_POST[$name];
+      }
+    }
+    foreach ($tags as $tag) {
+      $name = $tag['name'];
+      if ($name == 'your_file2') {
+        $file2 = $_POST[$name];
+        if ($cat == '中途採用(職務経歴書をお送りください)' && $file2 == '') {
+          $result->invalidate($name, '必須項目に入力してください。');
         }
       }
     }
-    return $items;
+
+    return $result;
   }
 
   //contact form 7 セレクトボックス空要素のテキスト変更

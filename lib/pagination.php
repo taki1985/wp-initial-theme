@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-function original_page_navi()
+function my_pagenate()
 {
 	global $wp_query;
 	$bignum = 999999999;

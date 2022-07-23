@@ -78,11 +78,9 @@ function my_is_ancestor($slug)
   global $post;
   $page = get_page_by_path($slug);
   $result = false;
-  if (isset($page) && property_exists("post", "ancestors")) {
-    foreach ($post->ancestors as $ancestor) {
-      if ($ancestor == $page->ID) {
-        $result = true;
-      }
+  foreach (get_post_ancestors($post->ID) as $ancestor) {
+    if ($ancestor == $page->ID) {
+      $result = true;
     }
   }
   return $result;

@@ -24,8 +24,19 @@ class MY_THEME_LOAD_ASSETS
 
     // css フッター設置
     add_action('get_footer', array($this, 'prefix_add_footer_styles'));
+
+
+    //CF7用プラグイン後方互換
+    add_action('wp_enqueue_scripts', array($this, 'cf7_script_and_style'));
   }
 
+  //CF7用プラグイン後方互換
+  function cf7_script_and_style()
+  {
+    // add here the logic to return if this isn't the contact page
+    if (function_exists('wpcf7_enqueue_scripts')) wpcf7_enqueue_scripts();
+    if (function_exists('wpcf7_enqueue_styles')) wpcf7_enqueue_styles();
+  }
 
   //cssをfooterで読み込ませる
   function prefix_add_footer_styles()
@@ -50,6 +61,9 @@ class MY_THEME_LOAD_ASSETS
         get_template_directory_uri() . '/style.css?' . filemtime(get_stylesheet_directory() . '/style.css')
       );
 
+      wp_enqueue_script('jquery');
+
+      /*
       // jQueryの読み込み(jQuery migrate(後方互換)は読み込まない)
       global $wp_scripts;
       $jquery = $wp_scripts->registered['jquery-core'];
@@ -61,6 +75,8 @@ class MY_THEME_LOAD_ASSETS
       // 登録しなおし
       wp_register_script('jquery', false, ['jquery-core'], $jquery_ver, true);
       wp_register_script('jquery-core', $jquery_src, [], $jquery_ver, true);
+*/
+
 
       wp_enqueue_script(
         'mainJs',
