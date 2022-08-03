@@ -197,10 +197,7 @@ class MY_THEME_ADMIN
 	 */
 	function add_admin_menu()
 	{
-		$this->add_menu_page_by_slug('よくある質問', 'よくある質問', 'manage_options', 'culture/faq', '', 'dashicons-admin-comments', 7);
-		$this->add_menu_page_by_slug('新卒募集要項', '新卒募集要項', 'manage_options', 'requirements/new', '', 'dashicons-media-spreadsheet', 8);
-		$this->add_menu_page_by_slug('中途募集要項', '中途募集要項', 'manage_options', 'requirements/career', '', 'dashicons-media-spreadsheet', 8);
-		$this->add_menu_page_by_slug('インターン', 'インターン', 'manage_options', 'requirements/internship', '', 'dashicons-media-spreadsheet', 9);
+		// $this->add_menu_page_by_slug('よくある質問', 'よくある質問', 'manage_options', 'culture/faq', '', 'dashicons-admin-comments', 7);
 	}
 
 	function add_menu_page_by_slug($page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position)
