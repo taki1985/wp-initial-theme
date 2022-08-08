@@ -10,7 +10,7 @@ function my_breadcrumb()
 	$str = '';
 	if (!is_front_page() && !is_admin()) { /* !is_admin は管理ページ以外という条件分岐 */
 		$str .= '<ol class="list-inline" itemscope itemtype="http://schema.org/BreadcrumbList">';
-		$str .= '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url('/') . '" class="home" itemprop="item" ><span itemprop="name">採用サイト トップページ</span></a><meta itemprop="position" content="1" /></li>';
+		$str .= '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url('/') . '" class="home" itemprop="item" ><span itemprop="name">トップページ</span></a><meta itemprop="position" content="1" /></li>';
 
 		/* 投稿のページ */
 		if (is_single()) {

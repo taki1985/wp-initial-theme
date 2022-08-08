@@ -4,5 +4,5 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <div class="breadcrumbs">
-	<?php breadcrumb(); ?>
+	<?php my_breadcrumb(); ?>
 </div>
