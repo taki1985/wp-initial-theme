@@ -44,8 +44,8 @@ $args = wp_parse_args(
 					</a>
 				</li>
 
-				<li class="nav-global__item nav-global__item--dropdown">
-					<a href="<?php echo get_permalink(get_page_by_path('company')->ID); ?>" <?php if (is_page("company") || is_ancestor('company')) echo "data-isCurrent='true'" ?>>
+				<li class="nav-global__item--dropdown">
+					<a href="<?php echo get_permalink(get_page_by_path('company')->ID); ?>" <?php if (is_page("company") || my_is_ancestor('company')) echo "data-isCurrent='true'" ?>>
 						会社情報
 					</a>
 					<div class="dropdown-menu">
@@ -105,128 +105,20 @@ $args = wp_parse_args(
 					</div>
 				</li>
 
-				<li class="nav-global__item nav-global__item--dropdown">
-					<a href="<?php echo get_permalink(get_page_by_path('products')->ID); ?>" <?php if (is_page("products") || is_ancestor('products')) echo "data-isCurrent='true'" ?>>
-						事業紹介
-					</a>
-					<div class="dropdown-menu">
-						<div class="dropdown-menu__container container-lg">
-							<div class="dropdown-menu__top">
-								<div class="dropdown-menu__title">
-									<p class="dropdown-menu__title-en">Business</p>
-									<p class="dropdown-menu__title-ja">事業紹介</p>
-								</div>
-								<a href="<?php echo get_permalink(get_page_by_path('products')->ID); ?>" class="dropdown-menu__btn">View More<span class="link-arrow"></span></a>
-							</div>
-							<ul class="dropdown-nav dropdown-nav--min">
-								<?php
-								$children = [
-									array(
-										'slug'     => "products/bridge",
-										'thumb'    => "products-bridge",
-										'text'     => "橋梁事業"
-									),
-									array(
-										'slug'     => "products/iron",
-										'thumb'    => "products-iron",
-										'text'     => "鉄骨事業"
-									),
-									array(
-										'slug'     => "products/rebri",
-										'thumb'    => "products-rebri",
-										'text'     => "Re-BRI[リブリ]"
-									),
-									array(
-										'slug'     => "products/job",
-										'thumb'    => "products-job",
-										'text'     => "わたしたちのしごと（旧東京鐵骨橋梁）"
-									),
-								];
-								foreach ($children as $child) {
-									$args = array(
-										'slug'     => $child["slug"],
-										'thumb'    => $child["thumb"],
-										'text'     => $child["text"],
-									);
-									get_template_part('parts/nav', 'global-children', $args);
-								}
-								?>
-							</ul>
-						</div>
-					</div>
-				</li>
-
 				<li class="nav-global__item">
-					<a href="<?php echo get_permalink(get_page_by_path('making')->ID); ?>" <?php if (is_page("making") || is_ancestor('making')) echo "data-isCurrent='true'" ?>>
-						製品が<br class="visible-sm">できるまで
+					<a href="<?php echo get_post_type_archive_link('work'); ?>" <?php if (is_post_type_archive('work')) echo "data-isCurrent='true'" ?>>
+						実績紹介
 					</a>
 				</li>
 
 				<li class="nav-global__item">
-					<a href="<?php echo get_permalink(get_page_by_path('works')->ID); ?>" <?php if (is_page("works") || is_ancestor('works')) echo "data-isCurrent='true'" ?>>
-						事例検索
+					<a href="<?php echo get_permalink(get_page_by_path('news')->ID); ?>" <?php if (is_page("news") || is_home() || is_singular('post') || is_category()) echo "data-isCurrent='true'"; ?>>
+						お知らせ
 					</a>
 				</li>
 
-				<li class="nav-global__item nav-global__item--dropdown">
-					<a href="<?php echo get_permalink(get_page_by_path('technology')->ID); ?>" <?php if (is_page("technology") || is_ancestor('technology')) echo "data-isCurrent='true'" ?>>
-						技術情報
-					</a>
-					<div class="dropdown-menu">
-						<div class="dropdown-menu__container container-lg">
-							<div class="dropdown-menu__top">
-								<div class="dropdown-menu__title">
-									<p class="dropdown-menu__title-en">Technology</p>
-									<p class="dropdown-menu__title-ja">技術情報</p>
-								</div>
-								<a href="<?php echo get_permalink(get_page_by_path('technology')->ID); ?>" class="dropdown-menu__btn">View More<span class="link-arrow"></span></a>
-							</div>
-							<ul class="dropdown-nav dropdown-nav--min">
-								<?php
-								$children = [
-									array(
-										'slug'     => "technology/laboratory",
-										'thumb'    => "technology-laboratory",
-										'text'     => "技術研究所"
-									),
-									array(
-										'slug'     => "technology/iron",
-										'thumb'    => "technology-iron",
-										'text'     => "技術紹介（鉄骨）"
-									),
-									array(
-										'slug'     => "technology/bridge",
-										'thumb'    => "technology-bridge",
-										'text'     => "技術紹介（橋梁）"
-									),
-									array(
-										'slug'     => "technology/archives",
-										'thumb'    => "technology-archives",
-										'text'     => "日本ファブテック技報"
-									),
-								];
-								foreach ($children as $child) {
-									$args = array(
-										'slug'     => $child["slug"],
-										'thumb'    => $child["thumb"],
-										'text'     => $child["text"],
-									);
-									get_template_part('parts/nav', 'global-children', $args);
-								}
-								?>
-							</ul>
-						</div>
-					</div>
-				</li>
-
-				<li class="nav-global__item">
-					<a href="<?php echo get_permalink(get_page_by_path('recruit')->ID); ?>" <?php if (is_page("recruit") || is_ancestor('recruit')) echo "data-isCurrent='true'" ?>>
-						採用情報
-					</a>
-				</li>
-
-				<li class="nav-global__item nav-global__item--btn">
-					<a href="<?php echo get_permalink(get_page_by_path('contact')->ID); ?>" <?php if (is_page("contact") || is_ancestor('contact')) echo "data-isCurrent='true'" ?>>
+				<li class="nav-global__item--btn">
+					<a href="<?php echo get_permalink(get_page_by_path('contact')->ID); ?>" <?php if (is_page("contact") || my_is_ancestor('contact')) echo "data-isCurrent='true'" ?>>
 						<span class="icon"><img src="<?php echo IMG_URI; ?>/common/icon-mail.svg" alt=""></span>
 						<span class="text">お問い合わせ</span>
 					</a>

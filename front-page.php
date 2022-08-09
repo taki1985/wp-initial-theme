@@ -44,7 +44,7 @@ if ($recentPosts->have_posts()) :  ?>
         </div>
       </div>
       <div class="section-news__right">
-        <ul class="list-news">
+        <ul class="news-list">
           <?php if ($recentPosts->have_posts()) :
             while ($recentPosts->have_posts()) :
               $recentPosts->the_post();
