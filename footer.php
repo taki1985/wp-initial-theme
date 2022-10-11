@@ -41,6 +41,8 @@ $args = wp_parse_args(
 
 <footer class="footer">
 	<div class="footer__container container-lg">
+		<a href="#pagetop" id="pagetopbtn" class="pagetopbtn" title="Scroll Back to Top"><span class="pagetopbtn__text">PAGE TOP</span></a>
+
 		<div class="footer-company">
 			<h2 class="footer-company__logo">
 				<a href="<?php echo home_url(); ?>" class="footer__logo-img"><img src="<?php echo IMG_URI; ?>/common/logo-white.png" alt="<?php bloginfo('name'); ?>"></a>
@@ -86,10 +88,6 @@ $args = wp_parse_args(
 </footer>
 
 <?php wp_footer(); ?>
-<script>
-	scrolltotop.controlHTML = '<span class="txt">PAGE TOP<' + '/span>';
-	scrolltotop.init();
-</script>
 </body>
 
 </html>

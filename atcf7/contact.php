@@ -1,82 +1,128 @@
 <?php
+
+/**
+ * Template Name: お問い合わせフォーム
+ */
+
+
 if (!defined('ABSPATH')) {
   exit;
 }
 ?>
 
 <!--お問い合わせ-->
-<div class="flow-contact block-child--md">
-  <ul class="list-flow-contact wpcf7c-elm-step1">
-    <li class="step step-first current"><span>情報入力</span></li>
-    <li class="step"><span>入力内容確認</span></li>
-    <li class="step"><span>送信完了</span></li>
-  </ul>
-  <ul class="list-flow-contact wpcf7c-elm-step2">
-    <li class="step step-first"><span>情報入力</span></li>
-    <li class="step current"><span>入力内容確認</span></li>
-    <li class="step"><span>送信完了</span></li>
-  </ul>
-  <ul class="list-flow-contact wpcf7c-elm-step3">
-    <li class="step step-first"><span>情報入力</span></li>
-    <li class="step"><span>入力内容確認</span></li>
-    <li class="step current"><span>送信完了</span></li>
-  </ul>
-</div>
-<div id="mail-form" class="tgt-anchor">
-  <table class="table-form block-child--md">
+
+<div id="mailForm" class="mail-form block-child--sm">
+  <table class="form-table">
     <tbody>
-      <tr class="form-row">
-        <th class="form-head"><label for="your_category" onclick="">お問い合わせ項目</label><span class="mark-req">必須</span></th>
-        <td class="form-content">
-          [checkbox your_category id:fm_category class:radio-inlineblock exclusive use_label_element "一般的なお問い合わせ" "技術に関するお問い合わせ"]
+      <tr class="form-table__row">
+        <th class="form-table__head"><label for="your_category" onclick="">エントリー区分</label><span class="mark-req">必須</span></th>
+        <td class="form-table__content">
+          [radio your_category id:your_category class:radio-block exclusive use_label_element default:1 "新卒採用" "中途採用(職務経歴書をお送りください)" "インターンシップ"]
         </td>
       </tr>
-      <tr class="form-row">
-        <th class="form-head"><label for="fm_name" onclick="">お名前</label><span class="mark-req">必須</span></th>
-        <td class="form-content">
-          [text* your_name id:fm_name class:form-control]
+
+      <tr class="form-table__row">
+        <th class="form-table__head"><label for="your_name" onclick="">お名前</label><span class="mark-req">必須</span></th>
+        <td class="form-table__content">
+          [text* your_name id:your_name class:form-control placeholder "例 : 山田 太郎"]
         </td>
       </tr>
-      <tr class="form-row">
-        <th class="form-head"><label for="fm_kana" onclick="">フリガナ</label></th>
-        <td class="form-content">
-          [text your_kana id:fm_kana class:form-control]
+
+      <tr class="form-table__row">
+        <th class="form-table__head"><label for="your_kana" onclick="">フリガナ</label><span class="mark-req">必須</span></th>
+        <td class="form-table__content">
+          [text* your_kana id:your_kana class:form-control placeholder "例 : ヤマダ タロウ"]
         </td>
       </tr>
-      <tr class="form-row">
-        <th class="form-head"><label for="fm_email" onclick="">メールアドレス</label><span class="mark-req">必須</span></th>
-        <td class="form-content">
-          <div>
-            [email* your_email class:form-control id:fm_email]
+
+      <tr class="form-table__row">
+        <th class="form-table__head"><label for="your_tel" onclick="">電話番号</label><span class="mark-req">必須</span></th>
+        <td class="form-table__content">
+          [tel* your_tel id:your_tel class:form-control placeholder "例 : 03-1234-5678"]
+        </td>
+      </tr>
+
+      <tr class="form-table__row">
+        <th class="form-table__head"><label for="your_mail" onclick="">メールアドレス</label><span class="mark-req">必須</span></th>
+        <td class="form-table__content">
+          [email* your_email id:your_email class:form-control placeholder "例 : yamada@sample.com"]
+        </td>
+      </tr>
+
+      <tr class="form-table__row">
+        <th class="form-table__head"><label for="your_year" onclick="">生年月日</label><span class="mark-req">必須</span></th>
+        <td class="form-table__content">
+          <div class="form-row form-ymd">
+            <!--日付自動制御-->
+            <div class="form-row__col" data-start="-15">
+              <div class="form-adornments">
+                [select* your_year id:your_year class:js-year class:form-select include_blank]
+                <p class="form-adornments__after">年</p>
+              </div>
+            </div>
+            <div class="form-row__col">
+              <div class="form-adornments">
+                [select* your_month id:your_month class:js-month class:form-select include_blank]
+                <p class="form-adornments__after">月</p>
+              </div>
+            </div>
+            <div class="form-row__col">
+              <div class="form-adornments">
+                [select* your_day id:your_day class:js-day class:form-select include_blank]
+                <p class="form-adornments__after">日</p>
+              </div>
+            </div>
           </div>
         </td>
       </tr>
-      <tr class="form-row">
-        <th class="form-head"><label for="fm_corp" onclick="">会社名</label></th>
-        <td class="form-content">
-          [text your_corp id:fm_corp class:form-control]
+
+      <tr class="form-table__row">
+        <th class="form-table__head"><label for="your_zip" onclick="">ご住所</label><span class="mark-req">必須</span></th>
+        <td class="form-table__content">
+          <div class="block-child--sm">
+            <div class="form-adornments">
+              <p class="form-adornments__before">〒</p>
+              [text* your_zip id:your_zip size:15 class:form-control class:input-inline]
+            </div>
+          </div>
+          <div class="block-child--xs">
+            [text* your_address id:your_address class:form-control placeholder "※建物名・部屋番号までご入力ください。"]
+          </div>
         </td>
       </tr>
-      <tr class="form-row">
-        <th class="form-head"><label for="fm_content" onclick="">お問い合わせ内容</label><span class="mark-req">必須</span></th>
-        <td class="form-content">
-          [textarea* your_content x5 class:form-control id:fm_content]
+
+      <tr class="form-table__row">
+        <th class="form-table__head">履歴書<span class="mark-req">必須</span></th>
+        <td class="form-table__content">
+          <div class="form-file use-floating-validation-tip">[file* your_file1 id:your_file1 limit:1048576 filetypes:xls|xlsx|doc|docx|pdf]<label for="your_file1" class="wpcf7c-elm-step1">ファイルを選択</label><a class="form-file__delete wpcf7c-elm-step1" style="display:none;"></a></div>
+          <div class="block-child--xs">
+            <p class="text-note">※1ファイルあたり500KB以下でお願いします。</p>
+            <p class="text-note">※ファイルの容量が大きい場合は、データを圧縮するか「その他」にご記入ください。</p>
+          </div>
         </td>
       </tr>
+
+      <tr class="form-table__row">
+        <th class="form-table__head"><label for="your_content" onclick="">その他</label></th>
+        <td class="form-table__content">
+          [textarea your_content id:your_content x5 class:form-control placeholder "ご自由にご記入ください"]
+        </td>
+      </tr>
+
     </tbody>
   </table>
 
-  <div class="block-privacy">
-    <p class="block-privacy__ttl">
+  <div class="privacy-block block-child--md">
+    <p class="privacy-block__title">
       個人情報の取り扱いについて
     </p>
-    <div class="block-privacy__box">
+    <div class="privacy-block__box">
       <p>
-        ご記入・ご提出頂いた個人情報は、お客様のお問合わせに対する回答のために利用させて頂きます。
-        プライバシー・ポリシーに関しては<a href="../privacy" target="_blank">こちら</a>をご覧ください。
+        ご記入・ご提出頂いた個人情報は、お客様のお問合わせに対する回答のために利用させて頂きます。<br>それ以外に利用することは一切ありません。<br>当社のプライバシーポリシーに関しては<a href="/privacy" target="_blank">こちら</a>をご覧ください。
       </p>
     </div>
-    <div class="block-privacy__check">[acceptance fm_policy] プライバシーポリシーに同意する [/acceptance]</div>
+    <div class="privacy-block__check">[acceptance your_policy] プライバシーポリシーに同意する [/acceptance]</div>
   </div>
 
   <div class="form-btns">[back class:btn-back id:btn-back "戻る"][confirm class:btn-submit id:btn-confirm "送信内容を確認する"][submit class:btn-submit id:btn-submit "送信する"]</div>

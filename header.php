@@ -25,10 +25,6 @@ if (!defined('ABSPATH')) {
 																		} ?>">
 	<link rel="apple-touch-icon" href="<?php echo esc_html(T_DIRE_URI); ?>/apple-touch-icon.png">
 	<link rel="icon" href="<?php echo esc_html(T_DIRE_URI); ?>/favicon.ico">
-
-	<script>
-		var scrolltop_manual_start = true;
-	</script>
 	<!--[if IE]>
 	<link rel="shortcut icon" href="<?php echo esc_html(T_DIRE_URI); ?>/favicon.ico">
 <![endif]-->
@@ -37,6 +33,6 @@ if (!defined('ABSPATH')) {
 	<?php /* Wend of WordPress head */ ?>
 </head>
 
-<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
+<body id="pagetop" <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
 	<?php get_template_part('parts/icons'); ?>
 	<?php get_template_part('parts/nav', 'global'); ?>

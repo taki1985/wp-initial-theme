@@ -48,7 +48,7 @@ get_header();
       </p>
     </div>
     <div class="block-child--md">
-      <?php echo do_shortcode('[contact-form-7 id="2145" title="お問い合わせフォーム"]'); ?>
+      <?php echo do_shortcode('[contact-form-7 id="4" title="お問い合わせフォーム"]'); ?>
     </div>
   </section>
 </div>

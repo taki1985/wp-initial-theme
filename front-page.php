@@ -15,7 +15,11 @@ get_header();
 <div class="top-kv">
 
 </div>
-
+<div class="section-lg">
+  <p class="container-lg">
+    <span data-action="call" data-tel="1111111">012-345-5678</span>
+  </p>
+</div>
 <?php
 $list_count = 3;
 $sticky = get_option('sticky_posts');

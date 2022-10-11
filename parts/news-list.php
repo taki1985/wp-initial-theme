@@ -70,7 +70,7 @@ $is_external = false;
     </div>
   <?php else : //投稿などへのリンクあり
   ?>
-    <span class="link-arrow link-arrow--light link-arrow--xs"></span>
+    <span class="link-arrow"></span>
     </a>
   <?php endif; ?>
 </li>
