@@ -65,7 +65,8 @@ $args = wp_parse_args(
 										array(
 											'slug'     => "company/network",
 											'thumb'    => "company-network",
-											'text'     => "拠点一覧"
+											'text'     => "拠点一覧",
+											"hash"     => "security"
 										),
 										array(
 											'slug'     => "company/data",
@@ -108,6 +109,7 @@ $args = wp_parse_args(
 											'slug'     => $child["slug"],
 											'thumb'    => $child["thumb"],
 											'text'     => $child["text"],
+											'hash'     => isset($child["hash"]) ? $child["hash"] : "",
 										);
 										get_template_part('parts/nav', 'global-children', $args);
 									}
