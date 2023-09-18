@@ -9,8 +9,8 @@ function my_breadcrumb()
 	global $post;
 	$str = '';
 	if (!is_front_page() && !is_admin()) { /* !is_admin は管理ページ以外という条件分岐 */
-		$str .= '<ol class="list-inline" itemscope itemtype="http://schema.org/BreadcrumbList">';
-		$str .= '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url('/') . '" class="home" itemprop="item" ><span itemprop="name">トップページ</span></a><meta itemprop="position" content="1" /></li>';
+		$str .= '<ol itemscope itemtype="http://schema.org/BreadcrumbList">';
+		$str .= '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url('/') . '" class="home" itemprop="item" ><span class="breadcrumbs__home" itemprop="name"><span class="breadcrumbs__icon"><svg width="24" height="24"><use xlink:href="#home"></use></svg></span>ホーム</span></a><meta itemprop="position" content="1" /></li>';
 
 		/* 投稿のページ */
 		if (is_single()) {

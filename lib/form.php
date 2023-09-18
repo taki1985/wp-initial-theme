@@ -29,7 +29,10 @@ class MY_THEME_FORM
     // カスタムバリデーション
     // add_filter('wpcf7_validate', array($this, 'custom_wpcf7_validate'), 11, 2);
 
-    add_filter('wpcf7_validate_file', array($this,  'custom_wpcf7_file_validate_filter'), 20, 2);
+    // add_filter('wpcf7_validate_file', array($this,  'custom_wpcf7_file_validate_filter'), 20, 2);
+
+    // add_filter('wpcf7_validate_email', array($this, 'custom_wpcf7_validate_email_filter_extend'), 11, 2);
+    // add_filter('wpcf7_validate_email*', array($this, 'custom_wpcf7_validate_email_filter_extend'), 11, 2);
 
     //指定ページでなければCF7とreCAPTCHAのJS,CSSを読み込まない
     add_action('template_redirect', array($this, 'remove_cf7_js_css'));
@@ -74,6 +77,27 @@ class MY_THEME_FORM
       }
     }
 
+    return $result;
+  }
+
+  function custom_wpcf7_validate_email_filter_extend($result, $tag)
+  {
+    $type = $tag['type'];
+    $name = $tag['name'];
+    $_POST[$name] = trim(strtr((string) $_POST[$name], "n", " "));
+    if ('email' == $type || 'email*' == $type) {
+      if (preg_match('/(.*)_confirm$/', $name, $matches)) { //確認用メルアド入力フォーム名を ○○○_confirm としています。
+        $target_name = $matches[1];
+        if ($_POST[$name] != $_POST[$target_name]) {
+          if (method_exists($result, 'invalidate')) {
+            $result->invalidate($tag, "確認用のメールアドレスが一致していません");
+          } else {
+            $result['valid'] = false;
+            $result['reason'][$name] = '確認用のメールアドレスが一致していません';
+          }
+        }
+      }
+    }
     return $result;
   }
 

@@ -73,11 +73,11 @@ class MY_THEME
 		new MY_THEME_EDITOR();
 
 		/*OGPタグ自動挿入*/
-		require_once 'lib/ogp.php';
-		new MY_THEME_OGP();
+		// require_once 'lib/ogp.php';
+		// new MY_THEME_OGP();
 
 		/*パンくず*/
-		require_once 'lib/breadclumbs.php';
+		require_once 'lib/breadcrumbs.php';
 
 		/*ページネーション*/
 		require_once 'lib/pagination.php';
@@ -103,3 +103,21 @@ class MY_THEME
 
 
 MY_THEME::get_instance();
+
+
+// フィルタの登録
+add_filter('content_save_pre', 'test_save_pre');
+
+function test_save_pre($content)
+{
+	global $allowedposttags;
+
+	// iframeとiframeで使える属性を指定する
+	$allowedposttags['iframe'] = array(
+		'class' => array(), 'src' => array(), 'width' => array(),
+		'height' => array(), 'frameborder' => array(), 'scrolling' => array(), 'marginheight' => array(),
+		'marginwidth' => array()
+	);
+
+	return $content;
+}

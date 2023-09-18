@@ -31,7 +31,7 @@ class MY_THEME_SETUP
 
 		// <title> タグ自動挿入
 		add_theme_support('title-tag');
-		add_filter('document_title_parts', array($this, 'rewrite_title'));
+		add_filter('document_title_components', array($this, 'rewrite_title'));
 
 		add_action('wp_print_scripts', array($this, 'autosave_off'));
 
@@ -55,9 +55,12 @@ class MY_THEME_SETUP
 	// アイキャッチ画像の定義と切り抜き
 	function set_thumbnail_size()
 	{
-		add_image_size('kv', 1400, 900, true);
-		add_image_size('gallery', 600, 600, true);
+		add_image_size('sm', 240, 240, false);
+		// add_image_size('中サイズ', 480, 480, true);
+		// add_image_size('大サイズ', 860, 860, true);
+		add_image_size('xl', 1720, 1720, false);
 	}
+
 
 	function rewrite_title($title)
 	{

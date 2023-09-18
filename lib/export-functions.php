@@ -45,7 +45,7 @@ function my_get_image_size($file)
 /*
 *WebP用画像タグ出力
 */
-function my_get_img_tag($src, $alt = "", $class = "", $use_size = true)
+function my_get_img_tag($src, $alt = "", $class = "", $use_size = true, $attrs = "")
 {
   $src_arr = explode('.', $src); //拡張子を分ける
   $img_src =  get_template_directory() . '/assets/img/' . $src;
@@ -53,9 +53,12 @@ function my_get_img_tag($src, $alt = "", $class = "", $use_size = true)
   if ($use_size) {
     $size = my_get_image_size($img_src);
   }
+  if (is_array($class)) {
+    $class = implode(' ', $class);
+  }
   $tags = "<picture>";
   $tags .= "<source type='image/webp' srcset='" . IMG_URI . "/" .  $src_arr[0] . ".webp'>";
-  $tags .= "<img src='" . IMG_URI . "/" . $src . "' alt='" . $alt . "' " . $size . " class=" . $class . ">";
+  $tags .= "<img src='" . IMG_URI . "/" . $src . "' alt='" . $alt . "' " . $size . " class='" . $class . "' " . $attrs . ">";
   $tags .= "</picture>";
   return $tags;
 }
@@ -88,6 +91,21 @@ function my_is_ancestor($slug)
   return $result;
 }
 
+
+
+//文字列を改行コードごとに区切る
+function my_wrapStringWithSpanTags($string, $class = "", $tag = "span")
+{
+  // 改行文字（\nや\r\nなど）を<>タグに置換
+  $classStr = $class ? "class='" . $class . "'" : "";
+  $replaceTag = '</' . $tag . '><' . $tag . ' ' . $classStr . '>';
+  $wrappedString = str_replace(PHP_EOL, $replaceTag, $string);
+
+  // 先頭と末尾に<span>タグを追加
+  $wrappedString = '<' . $tag . ' ' . $classStr . '>' . $wrappedString . '</' . $tag . '>';
+
+  return $wrappedString;
+}
 
 //console.log
 function consoleLog($str)
