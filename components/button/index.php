@@ -8,7 +8,7 @@ $args = wp_parse_args(
   $args,
   array(
     'url'     => '',
-    'text'     => 'View More',
+    'text'     => '詳しく見る',
     'property'     => '',
     "icon" => "",
     'target'     => '',
@@ -21,12 +21,12 @@ $args = wp_parse_args(
     <?php echo $args["text"]; ?>
   </span>
   <?php if ($args["icon"]) : ?>
-    <span class="btn__icon">
-      <svg width="24" height="24">
+  <span class="btn__icon">
+    <svg width="24" height="24">
         <use xlink:href="#pdf"></use>
       </svg>
-    </span>
+  </span>
   <?php else : ?>
-    <span class="link-arrow--white"></span>
+  <span class="link-arrow"></span>
   <?php endif; ?>
 </a>

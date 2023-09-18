@@ -6,7 +6,7 @@
  * @package WordPress
  */
 if (!defined('ABSPATH')) {
-	exit;
+  exit;
 }
 ?>
 <!DOCTYPE html>
@@ -29,5 +29,6 @@ if (!defined('ABSPATH')) {
 </head>
 
 <body id="pagetop" <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
-  <?php get_template_part('components/icons'); ?>
-  <?php get_template_part('components/globalNav/index'); ?>
+  <div class="page-wrapper">
+    <?php get_template_part('components/icons'); ?>
+    <?php get_template_part('components/globalNav/index'); ?>

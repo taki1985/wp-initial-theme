@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 $args = wp_parse_args(
   $args,
   array(
-    'class'          => '',
+    'property'          => '',
   )
 );
 
@@ -45,6 +45,7 @@ $args = wp_parse_args(
     <div class="drawer__backdrop js-drawerBackdrop"></div>
     <div class="drawer__inner">
       <nav class="global-nav">
+
         <div class="global-nav__list">
           <ul class="global-list js-dropdownRoot">
             <li class="global-list__item visible-xs visible-sm">
@@ -52,79 +53,84 @@ $args = wp_parse_args(
                 トップページ
               </a>
             </li>
-            <li class="global-list__item--dropdown js-dropdownItem">
-              <span class="global-list__text js-dropdownBtn" <?php if (is_page("company") || my_is_ancestor('company')) echo "data-isCurrent='true'" ?>>
-                会社情報
-              </span>
-              <div class="dropdown-menu js-dropdownMenu" aria-hidden="true">
-                <div class="dropdown-menu__container">
-                  <div class="dropdown-menu__header">
-                    <div class="dropdown-menu__title">
-                      <div class="dropdown-title">
-                        <p class="dropdown-title__en">Company</p>
-                        <p class="dropdown-title__ja">会社情報</p>
-                      </div>
-                    </div>
-                    <a href="<?php echo get_permalink(get_page_by_path('company')->ID); ?>" class="dropdown-menu__btn">View More<span class="link-arrow"></span></a>
-                  </div>
-                  <div class="dropdown-menu__main">
-                    <ul class="dropdown-list">
-                      <?php
-                      $children = [
-                        array(
-                          'url'     => get_permalink(get_page_by_path('company/about')->ID),
-                          'text'     => "会社概要",
-                          'image' => my_get_img_tag("common/img-company-about_sm.jpg", "会社概要")
-                        ),
-                        array(
-                          'url'     => get_permalink(get_page_by_path('company/history')->ID),
-                          'text'     => "会社沿革",
-                          'image' => my_get_img_tag("common/img-company-history_sm.jpg", "会社沿革")
-                        ),
-                      ];
-                      foreach ($children as $child) {
-                        $args = array(
-                          'url' => $child["url"],
-                          'text' => $child["text"],
-                          'image' => $child["image"],
-                        );
-                        get_template_part('components/nav/children', '', $args);
-                      }
-                      ?>
-                    </ul>
-                  </div>
-                </div>
-            </li>
 
             <li class="global-list__item">
-              <a href="<?php echo get_post_type_archive_link('work'); ?>" class="global-list__text" <?php if (is_post_type_archive('work')) echo "data-isCurrent='true'" ?>>
-                実績紹介
+              <a href="<?php echo get_permalink(get_page_by_path('about')->ID); ?>" class="global-list__text" <?php if (is_page("about")) echo "data-isCurrent='true'" ?>>
+                <span class="global-list__lg">光翔について</span>
+                <span class="global-list__sm"><span>About</span></span>
               </a>
             </li>
 
             <li class="global-list__item">
-              <a href="<?php echo get_permalink(get_page_by_path('news')->ID); ?>" class="global-list__text" <?php if (is_page("news") || is_home() || is_singular('post') || is_category()) echo "data-isCurrent='true'"; ?>>
-                お知らせ
+              <a href="<?php echo get_permalink(get_page_by_path('flow')->ID); ?>" class="global-list__text" <?php if (is_page("flow")) echo "data-isCurrent='true'" ?>>
+                <span class="global-list__lg">ご利用の流れ</span>
+                <span class="global-list__sm"><span>Flow</span></span>
               </a>
             </li>
 
-            <li class="global-list__item--btn">
-              <a href="<?php echo get_permalink(get_page_by_path('contact')->ID); ?>" class="global-list-btn" <?php if (is_page("contact") || my_is_ancestor('contact')) echo "data-isCurrent='true'" ?>>
-                <span class="global-list-btn__icon">
-                  <svg width="24" height="24">
-                    <use xlink:href="#mail"></use>
-                  </svg>
-                </span>
-                <span class="global-list-btn__text">お問い合わせ</span>
+            <li class="global-list__item">
+              <a href="<?php echo get_permalink(get_page_by_path('service')->ID); ?>" class="global-list__text" <?php if (is_page("service")) echo "data-isCurrent='true'" ?>>
+                <span class="global-list__lg">業務内容</span>
+                <span class="global-list__sm"><span>Service</span></span>
+              </a>
+            </li>
+
+
+            <li class="global-list__item">
+              <a href="<?php echo get_post_type_archive_link('works'); ?>" class="global-list__text" <?php if (is_post_type_archive('works')) echo "data-isCurrent='true'" ?>>
+                <span class="global-list__lg">施工事例</span>
+                <span class="global-list__sm"><span>Works</span></span>
+              </a>
+            </li>
+
+            <li class="global-list__item">
+              <a href="<?php echo get_permalink(get_page_by_path('company')->ID); ?>" class="global-list__text" <?php if (is_page("company")) echo "data-isCurrent='true'" ?>>
+                <span class="global-list__lg">会社案内</span>
+                <span class="global-list__sm"><span>Company</span></span>
+              </a>
+            </li>
+
+            <li class="global-list__item">
+              <a href="<?php echo get_permalink(get_page_by_path('staf')->ID); ?>" class="global-list__text" <?php if (is_page("staf")) echo "data-isCurrent='true'" ?>>
+                <span class="global-list__lg">スタッフ紹介</span>
+                <span class="global-list__sm"><span>Staff</span></span>
+              </a>
+            </li>
+
+            <li class="global-list__item">
+              <a href="<?php echo get_permalink(get_page_by_path('blog')->ID); ?>" class="global-list__text" <?php if (is_page("blog") || is_home() || is_singular('blog') || is_category()) echo "data-isCurrent='true'"; ?>>
+                <span class="global-list__lg">ブログ</span>
+                <span class="global-list__sm"><span>Blog</span></span>
               </a>
             </li>
 
           </ul>
         </div>
+
+        <div class="global-nav__sub">
+          <div class="global-sub">
+            <div class="global-sub__tel">
+              <?php get_template_part('components/telBlock'); ?>
+            </div>
+            <div class="global-sub__btn">
+              <a href="<?php echo get_permalink(get_page_by_path('contact')->ID); ?>" class="global-subBtn">
+                <span class="global-subBtn__icon">
+                  <svg width="24" height="24">
+                    <use xlink:href="#contact"></use>
+                  </svg>
+                </span>
+                <span class="global-subBtn__text">
+                  無料見積り・お問い合わせ
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+
       </nav>
     </div>
   </div>
 
 </header>
 
-<main class="main">
+<main class="page-wrapper__main">

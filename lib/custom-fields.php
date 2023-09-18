@@ -40,13 +40,13 @@ class MY_THEME_CUSTOM_FILED
 	function insert_news_fields()
 	{
 		global $post;
-		$is_txt_check = '';
-		if (get_post_meta($post->ID, 'is_txt', true) == 'is-on') {
-			$is_txt_check = 'checked';
+		$is_text_check = '';
+		if (get_post_meta($post->ID, 'is_text', true) == 'is-on') {
+			$is_text_check = 'checked';
 		}
 
 		echo '<table class="form-table">';
-		echo '<tr><th scope="row"><label for="is_txt">リンクなし</label></th><td><input type="checkbox" name="is_txt" type="text" id="is_txt"  value="is-on" ' . $is_txt_check . '><p class="description" id="tagline-description">記事タイトルをそのまま表示させます。</p></td></tr>';
+		echo '<tr><th scope="row"><label for="is_text">リンクなし</label></th><td><input type="checkbox" name="is_text" type="text" id="is_text"  value="is-on" ' . $is_text_check . '><p class="description" id="tagline-description">記事タイトルをそのまま表示させます。</p></td></tr>';
 		echo '<tr><th scope="row"><label for="url">URL</label></th><td><input type="text" name="url" type="text" id="url"  value="' . get_post_meta($post->ID, 'url', true) . '" size="50" /><p class="description" id="tagline-description">指定ページ・外部記事・PDFへのリンクの場合URLを入力してください。</p></td></tr>';
 		echo '</table>';
 	}
@@ -75,8 +75,8 @@ class MY_THEME_CUSTOM_FILED
 			update_post_meta($post_id, 'url', $_POST['url']);
 		else delete_post_meta($post_id, 'url');
 
-		if (!empty($_POST['is_txt']))
-			update_post_meta($post_id, 'is_txt', $_POST['is_txt']);
-		else delete_post_meta($post_id, 'is_txt');
+		if (!empty($_POST['is_text']))
+			update_post_meta($post_id, 'is_text', $_POST['is_text']);
+		else delete_post_meta($post_id, 'is_text');
 	}
 }
